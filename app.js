@@ -76,7 +76,7 @@ app.post('/signin', (req, res) => {
     });
 });
 
-app.post('/category', (req, res) => {
+app.post('/category',requireAuth, (req, res) => {
     const { category_name } = req.body;
     var sql = "INSERT INTO categories (category_name) VALUES ('"+category_name+"')";
     connection.query(sql, (err, results, fields) => {
@@ -84,7 +84,6 @@ app.post('/category', (req, res) => {
         console.log(err);
         res.send({ success: true, message: 'Category created successfully' });
     });
-
 
 });
 
